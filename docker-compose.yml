@@ -1,0 +1,16 @@
+version: "3.8"
+
+# Services
+services:
+  # Redis
+  redis:
+    build: ./docker/redis
+    restart: always
+    volumes:
+      - ./data/redis:/data
+    command: --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru
+    ports:
+      - "${REDIS_PORT}:6379"
+#Volumes
+volumes:
+  data:
